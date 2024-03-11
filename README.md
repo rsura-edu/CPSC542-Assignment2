@@ -1,7 +1,7 @@
 # CPSC542-Assignment2
 
 Link to [Github Repository](https://github.com/rsura-edu/CPSC542-Assignment2).
-Link to [external dataset](https://www.kaggle.com/datasets/balraj98/berkeley-segmentation-dataset-500-bsds500/data) (reuploaded to github for convenience)
+Link to [external dataset](https://github.com/VikramShenoy97/Human-Segmentation-Dataset/tree/master) (reuploaded to my repository for convenience)
 
 ## 1) Personal Info
 
