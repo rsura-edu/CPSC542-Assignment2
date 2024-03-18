@@ -24,8 +24,8 @@ Link to [external dataset](https://github.com/VikramShenoy97/Human-Segmentation-
 ## 4) A list of all references used to complete the assignment, including peers (if applicable):
 
 - https://arxiv.org/pdf/1505.04597.pdf for U-net architecture
-- 
-- https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_score.html
+- https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img for loading images
+- https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_score.html for IOU score
 
 ## 5) Instructions for running the assignment
 
