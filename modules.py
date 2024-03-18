@@ -87,7 +87,14 @@ def unet(input_size=(224, 224, 3)):
 
     return Model(inputs=[inputs], outputs=[conv10])
 
+# unflatten masks that are flat to an original shape
+def unflatten_masks(flat_masks, original_shape):
+    return flat_masks.reshape(-1, *original_shape)
+
+# Plots a 3 best 3 worst metric
 def plot_3_best_worst(model, accuracy_scores, X, y, filename="my_3best.png"):
+    
+    # finding indices
     sorted_accuracies = sorted(accuracy_scores)
     best_1_index = accuracy_scores.index(sorted_accuracies[-1])
     best_2_index = accuracy_scores.index(sorted_accuracies[-2])
@@ -98,17 +105,21 @@ def plot_3_best_worst(model, accuracy_scores, X, y, filename="my_3best.png"):
     
     plt.figure(figsize=(21, 12))
     for i, (best, worst) in enumerate(((best_1_index, worst_1_index), (best_2_index, worst_2_index), (best_3_index, worst_3_index)), 1):
+        
+        # original good image with heatmap on top
         plt.subplot(3, 6, (i-1)*6+1)
         plt.imshow(X[best])
         plt.imshow(model.predict(X)[best], cmap='hot', interpolation='nearest', alpha=0.4)
-        plt.title('Original Image')
+        plt.title('Original Image w/ GradCAM')
         plt.axis('off')
     
+        # given good mask
         plt.subplot(3, 6, (i-1)*6+2)
         plt.imshow(y[best], cmap='gray')
         plt.title(f'\n*BEST #{i}*\n\nGiven Mask')
         plt.axis('off')
 
+        # predicted good mask
         plt.subplot(3, 6, (i-1)*6+3)
         plt.imshow((model.predict(X) > 0.33).astype(np.float32)[best], cmap='gray')
         plt.title('Predicted Mask')
@@ -116,17 +127,20 @@ def plot_3_best_worst(model, accuracy_scores, X, y, filename="my_3best.png"):
 
         # --------
 
+        # original bad image with heatmap on top
         plt.subplot(3, 6, (i-1)*6+4)
         plt.imshow(X[worst])
         plt.imshow(model.predict(X)[worst], cmap='hot', interpolation='nearest', alpha=0.4)
-        plt.title('Original Image')
+        plt.title('Original Image w/ GradCAM')
         plt.axis('off')
 
+        # given bad mask
         plt.subplot(3, 6, (i-1)*6+5)
         plt.imshow(y[worst], cmap='gray')
         plt.title(f'\n*WORST #{i}*\n\nGiven Mask')
         plt.axis('off')
 
+        # predicted bad mask
         plt.subplot(3, 6, (i-1)*6+6)
         plt.imshow((model.predict(X) > 0.33).astype(np.float32)[worst], cmap='gray')
         plt.title('Predicted Mask')

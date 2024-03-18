@@ -27,6 +27,26 @@ except:
                         callbacks=[EarlyStopping(patience=5, monitor='val_loss', restore_best_weights=True)])
     model.save(model_file_name)
 
+    # plotting training & validation accuracy values
+    plt.figure(figsize=(12, 6))
+    plt.subplot(1, 2, 1)
+    plt.plot(history.history['accuracy'])
+    plt.plot(history.history['val_accuracy'])
+    plt.title('Model accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Validation'], loc='upper left')
+
+    # plot training & validation loss values
+    plt.subplot(1, 2, 2)
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('Model loss')
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Validation'], loc='upper left')
+    plt.savefig('my_cnn_history.png')
+
 # ------------------------------------------------
 # text/numeric eval of the model
 loss, accuracy = model.evaluate(X_train, y_train)
