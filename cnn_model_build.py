@@ -15,6 +15,7 @@ model: object # declared for sake of scope
 model_file_name = 'my_cnn_model.h5'
 try:
     model = load_model(model_file_name)
+    print("Existing CNN model exists")
 except:
     model = unet()
 
@@ -46,32 +47,6 @@ except:
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Validation'], loc='upper left')
     plt.savefig('my_cnn_history.png')
+    
+    print("CNN model trained and saved. View 'my_cnn_history.png' for training history")
 
-# ------------------------------------------------
-# text/numeric eval of the model
-loss, accuracy = model.evaluate(X_train, y_train)
-print(f'Train loss: {loss}, Train accuracy: {accuracy}')
-loss, accuracy = model.evaluate(X_test, y_test)
-print(f'Test loss: {loss}, Test accuracy: {accuracy}')
-
-
-iou_scores = []
-for i in range(len(y_test)):
-    iou = jaccard_score(y_test[i].flatten(), 
-                        (model.predict(X_test) > 0.33).astype(np.float32)[i].flatten())
-    iou_scores.append(iou)
-
-# avg iou score
-mean_iou = np.mean(iou_scores)
-print(f'Mean IOU: {mean_iou}')
-
-# ------------------------------------------------
-# visual evaluation showing original, given mask, and pred mask
-
-plot_3_best_worst(model,
-                  [accuracy_score(y_test[i].flatten(), 
-                        (model.predict(X_test) > 0.33).astype(np.float32)[i].flatten()) 
-                   for i in range(len(y_test))], 
-                  X_test, 
-                  y_test, 
-                  'my_cnn_3best3worst.png')

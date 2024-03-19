@@ -13,7 +13,12 @@ Link to [external dataset](https://github.com/VikramShenoy97/Human-Segmentation-
 
 ## 2) Source Files:
 
-- 
+- eda.py
+- modules.py
+- cnn_model_build.py
+- cnn_model_eval.py
+- rf_model_build.py
+- rf_model_eval.py
 
 ## 3) A description of any known compile or runtime errors, code limitations, or deviations from the assignment specification (if applicable):
 
@@ -23,9 +28,12 @@ Link to [external dataset](https://github.com/VikramShenoy97/Human-Segmentation-
 
 ## 4) A list of all references used to complete the assignment, including peers (if applicable):
 
+- Discussed with Shree Murthy and Dylan Inafuku about hyperparameter tuning and grad cam implementation
 - https://arxiv.org/pdf/1505.04597.pdf for U-net architecture
 - https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img for loading images
 - https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_score.html for IOU score
+- Old CPSC 393 code for model architecture and matplotlib
+- Old CPSC 392 code for random forest
 
 ## 5) Instructions for running the assignment
 

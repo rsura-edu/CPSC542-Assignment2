@@ -10,17 +10,10 @@ y_train = y_train.reshape(len(y_train), -1)
 y_test = y_test.reshape(len(y_test), -1)
 
 model_file_name = 'my_rf_model.pkl'
-# Load or fit the Random Forest model
-try:
-    with open(model_file_name, 'rb') as f:
-        rf_model = pickle.load(f)
-except Exception as e:
-    rf_model = RandomForestClassifier(n_estimators=1, max_depth=5, random_state=42)
-    rf_model.fit(X_train, y_train)
 
-    # serialize the model to a saved file
-    with open(model_file_name, 'wb') as f:
-        pickle.dump(rf_model, f)
+rf_model: object
+with open(model_file_name, 'rb') as f:
+    rf_model = pickle.load(f)
 
 # predict
 train_pred_masks = rf_model.predict(X_train)
