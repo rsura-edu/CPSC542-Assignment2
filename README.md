@@ -37,4 +37,11 @@ Link to [external dataset](https://github.com/VikramShenoy97/Human-Segmentation-
 
 ## 5) Instructions for running the assignment
 
-- 
+- To build each model:
+    - `python3 cnn_model_build.py`
+    - `python3 rf_model_build.py`
+- To evaluate each model:
+    - `python3 cnn_model_eval.py`
+    - `python3 rf_model_eval.py`
+- For exploratory data analysis:
+    - `python3 eda.py`
